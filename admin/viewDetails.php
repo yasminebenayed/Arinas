@@ -1,5 +1,8 @@
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=arinas", "root", "");
+require_once("connexionDb.php");
+
+
+
 //var_dump($_GET);
 //var_dump($_GET['code']);
 // Check if the category code is set in the URL
