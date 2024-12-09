@@ -1,3 +1,4 @@
+
 <?php
 require_once("connexionDb.php");
 
@@ -102,6 +103,19 @@ $categories = $results->fetchAll(PDO::FETCH_OBJ);
             color: #fff;
             margin-bottom: 20px;
         }
+        .btn-delete {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #c9302c;
+}
+
     </style>
 </head>
 
@@ -126,6 +140,7 @@ $categories = $results->fetchAll(PDO::FETCH_OBJ);
                         <th>ID</th>
                         <th>Nom Catégories</th>
                         <th>Voir les sous-catégories associées</th>
+                     
                     </tr>
                 </thead>
                 <tbody>
@@ -138,7 +153,10 @@ $categories = $results->fetchAll(PDO::FETCH_OBJ);
                                     <i style="font-size: 1.5em; color: #bc6c25;">&#xE417;</i>
                                 </a>
                             </td>
-                        </tr>
+                          
+
+</td>
+
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -147,6 +165,8 @@ $categories = $results->fetchAll(PDO::FETCH_OBJ);
 
 
     <script>
+         
+         
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
             var options = {

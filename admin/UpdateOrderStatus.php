@@ -2,34 +2,51 @@
 require_once("connexionDb.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Assuming you have a database connection
-    $pdo = new PDO("mysql:host=localhost;dbname=arinas", "root", "");
-
-    // Get data from the AJAX request
+    // Get data from the POST request
     $orderId = isset($_POST["orderId"]) ? intval($_POST["orderId"]) : 0;
-    $newStatus = isset($_POST["newStatus"]) ? $_POST["newStatus"] : '';
+    $action = isset($_POST["action"]) ? $_POST["action"] : ''; // 'validate' or 'reset'
 
-    // Validate inputs (add more validation as needed)
-    if ($orderId <= 0 || empty($newStatus)) {
-        echo json_encode(["success" => false, "error" => "Invalid input"]);
+    // Validate input
+    if ($orderId <= 0 || empty($action)) {
+        echo "Invalid input.";
         exit;
     }
 
-    // Update the order status in the database
-    $stmt = $pdo->prepare("UPDATE commande SET status = :newStatus WHERE code = :orderId");
-    $stmt->bindParam(':newStatus', $newStatus);
-    $stmt->bindParam(':orderId', $orderId);
-    
-    if ($stmt->execute()) {
-        // Send a success response
-        echo json_encode(["success" => true]);
-        exit;
-    } else {
-        // Send an error response if the update fails
-        echo json_encode(["success" => false, "error" => "Database error"]);
+    try {
+        // Set the status based on the action
+        if ($action === 'validate') {
+            $newStatus = 1; // Valider
+            header('commandes.php');
+        } elseif ($action === 'reset') {
+            $newStatus = 0; // Reset
+            header('commandes.php');
+        } else {
+            echo "Invalid action.";
+            exit;
+        }
+
+        // Update the order status in the database
+        $stmt = $pdo->prepare("UPDATE commande SET status = :newStatus WHERE code = :orderId");
+        $stmt->bindParam(':newStatus', $newStatus, PDO::PARAM_INT);
+        $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            // Redirect back to the details page with a success message
+            header("Location: viewDetails.php?code=$orderId&statusUpdate=success");
+            exit;
+        } else {
+            // Redirect back with an error message
+            header("Location: viewDetails.php?code=$orderId&statusUpdate=error");
+            exit;
+        }
+    } catch (PDOException $e) {
+        // Handle database errors
+        echo "Error: " . $e->getMessage();
         exit;
     }
+} else {
+    // Redirect back if the request method is not POST
+    header("Location: viewDetails.php?statusUpdate=invalidMethod");
+    exit;
 }
-
-// Send an error response if the request method is not POST
-echo json_encode(["success" => false, "error" => "Invalid request method"]);
+?>

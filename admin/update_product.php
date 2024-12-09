@@ -13,10 +13,12 @@ $marque = $stmtMarque->fetchAll(PDO::FETCH_OBJ);
 
 if (isset($_POST['code'])) {
     $selectedCode = $_POST['code'];
+
     $req2 = "SELECT * FROM sous_categorie WHERE code_categorie = :code";
     $results2 = $pdo->prepare($req2);
     $results2->execute(['code' => $selectedCode]);
     $sousCategories = $results2->fetchAll(PDO::FETCH_OBJ);
+   
 
     foreach ($sousCategories as $sc) {
         echo "<option value='" . $sc->code . "'>" . $sc->nom_sous_cat . "</option>";
@@ -197,73 +199,106 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $codeProduit) {
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Espace Admin</h2>
-        <form action="update_product.php?update=<?= $produit->code ?>" method="POST" enctype="multipart/form-data">
-            <!-- Product Details -->
-            <div class="form-group">
-                <label for="nomProduit">Nom de produit:</label>
-                <input type="text" id="nomProduit" name="nomProduit" value="<?= $produit->nomProduit ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required><?= $produit->description ?></textarea>
-            </div>
-            <div class="form-group">
-                <label for="designation">Designation:</label>
-                <textarea id="designation" name="designation" required><?= $produit->designation ?></textarea>
-            </div>
-           
-            <div class="form-group">
-    <label for="categorie">Catégorie:</label>
-    <select id="categorie" name="categorie" required>
-        <option value="">Sélectionnez une catégorie</option>
-        <?php foreach ($categories as $c): ?>
-            <option value="<?= htmlspecialchars($c->code) ?>" 
-                <?= $c->code == $produit->code_categorie ? 'selected' : '' ?>>
-                <?= htmlspecialchars($c->nomCategorie) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+<div class="container">
+    <h2>Espace Admin</h2>
+    <form action="update_product.php?update=<?= $produit->code ?>" method="POST" enctype="multipart/form-data">
+        <!-- Product Details -->
+        <div class="form-group">
+            <label for="nomProduit">Nom de produit:</label>
+            <input type="text" id="nomProduit" name="nomProduit" value="<?= $produit->nomProduit ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><?= $produit->description ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="designation">Designation:</label>
+            <textarea id="designation" name="designation" required><?= $produit->designation ?></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="categorie">Catégorie:</label>
+            <select id="categorie" name="categorie" required>
+                <option value="">Sélectionnez une catégorie</option>
+                <?php foreach ($categories as $c): ?>
+                    <option value="<?= htmlspecialchars($c->code) ?>" 
+                        <?= $c->code == $produit->code_categorie ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($c->nomCategorie) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <!-- Sous-catégorie Dropdown -->
+        <div class="form-group">
+            <label for="sous_categorie">Sous-catégorie:</label>
+            <select id="sous_categorie" name="sous_categorie" required>
+                <option value="">Sélectionnez une sous-catégorie</option>
+                <?php foreach ($sousCategories as $sc): ?>
+                    <option value="<?= htmlspecialchars($sc->code) ?>"
+                        <?= $sc->code == $produit->code_sous_cat ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($sc->nom_sous_cat) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <!-- Additional Fields -->
+        <div class="form-group">
+            <label for="marque">Marque:</label>
+            <select id="marque" name="marque" required>
+                <option value="">Sélectionnez une marque</option>
+                <?php foreach ($marque as $m): ?>
+                    <option value="<?= htmlspecialchars($m->code) ?>" 
+                        <?= $m->code == $produit->code_marque ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($m->nomMarque) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="quantite">Quantité en stock:</label>
+            <input type="number" id="quantite" name="quantite" value="<?= $produit->qte ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix unitaire:</label>
+            <input type="number" id="prix" name="prix" value="<?= $produit->prix ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="promo">Promotion:</label>
+            <input type="number" id="promo" name="promo" value="<?= $produit->promotion ?>" required>
+            <div id="promo-error" class="error-message">Promo should be less than 100.</div>
+        </div>
+        <div class="form-group">
+            <img src="<?= '../' . $produit->img ?>" alt="Image" width="70" height="70">
+            </br>
+            <label for="image">New image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    </form>
 </div>
 
-         
-           
-            <!-- Additional Fields -->
-            <div class="form-group">
-    <label for="marque">Marque:</label>
-    <select id="marque" name="marque" required>
-        <option value="">Sélectionnez une marque</option>
-        <?php foreach ($marque as $m): ?>
-            <option value="<?= htmlspecialchars($m->code) ?>" 
-                <?= $m->code == $produit->code_marque ? 'selected' : '' ?>>
-                <?= htmlspecialchars($m->nomMarque) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</div>
+<script>
+    // Fetch the sous-categories based on selected category
+    document.getElementById('categorie').addEventListener('change', function() {
+        var categoryId = this.value;
 
-            <div class="form-group">
-                <label for="quantite">Quantité en stock:</label>
-                <input type="number" id="quantite" name="quantite" value="<?= $produit->qte ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="prix">Prix unitaire:</label>
-                <input type="number" id="prix" name="prix" value="<?= $produit->prix ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="promo">Promotion:</label>
-                <input type="number" id="promo" name="promo" value="<?= $produit->promotion ?>" required>
-                <div id="promo-error" class="error-message">Promo should be less than 100.</div>
-            </div>
-            <div class="form-group">
-                <img src="<?= '../' . $produit->img ?>" alt="Image" width="70" height="70">
-        </br>
-                <label for="image">New image:</label>
-                <input type="file" id="image" name="image" accept="image/*">
-            </div>
-            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-        </form>
-    </div>
-</body>
-</html>
+        if (categoryId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'update_product.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('sous_categorie').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send('code=' + categoryId);
+        } else {
+            document.getElementById('sous_categorie').innerHTML = '<option value="">Sélectionnez une sous-catégorie</option>';
+        }
+    });
+</script>
+
+   
