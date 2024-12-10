@@ -156,40 +156,41 @@
   <div class="search-popup">
     <div class="search-popup-container">
 
-      <form role="search" method="get" class="form-group" action="">
-        <input type="search" id="search-form" class="form-control border-0 border-bottom"
-          placeholder="Type and press enter" value="" name="s" />
-        <button type="submit" class="search-submit border-0 position-absolute bg-white"
-          style="top: 15px;right: 15px;"><svg class="search" width="24" height="24">
-            <use xlink:href="#search"></use>
-          </svg></button>
-      </form>
+    <form role="search" method="get" class="form-group" action="indexsearch.php">
+  <input 
+    type="search" 
+    id="search-form" 
+    class="form-control border-0 border-bottom"
+    placeholder="Type and press enter" 
+    name="nomProduit" 
+    value="<?php echo isset($_GET['nomProduit']) ? htmlspecialchars($_GET['nomProduit']) : ''; ?>" 
+    required 
+  />
+  <button 
+    type="submit" 
+    class="search-submit border-0 position-absolute bg-white" 
+    style="top: 15px; right: 15px;">
+    <svg class="search" width="24" height="24">
+      <use xlink:href="#search"></use>
+    </svg>
+  </button>
+</form>
 
-      <h5 class="cat-list-title">Browse Categories</h5>
 
-      <ul class="cat-list">
-        <li class="cat-list-item">
-          <a href="#" title="Jackets">Jackets</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="T-shirts">T-shirts</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Handbags">Handbags</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Accessories">Accessories</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Cosmetics">Cosmetics</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Dresses">Dresses</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Jumpsuits">Jumpsuits</a>
-        </li>
-      </ul>
+      <h5 class="cat-list-title">Choisissez Votre Catégorie</h5>
+
+<ul class="cat-list">
+    <li class="cat-list-item">
+        <a href="indexsearchcat.php?category=Corps">Corps</a>
+    </li>
+    <li class="cat-list-item">
+        <a href="indexsearchcat.php?category=Cheveux">Cheveux</a>
+    </li>
+    <li class="cat-list-item">
+        <a href="indexsearchcat.php?category=Visage">Visage</a>
+    </li>
+</ul>
+
 
     </div>
   </div>
@@ -201,7 +202,7 @@
     <div class="offcanvas-body">
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
+          <span class="text-primary">Vos Favories</span>
           <span class="badge bg-primary rounded-pill">3</span>
         </h4>
         <ul class="list-group mb-3">

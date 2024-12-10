@@ -72,15 +72,27 @@ class ModelProduit extends Model
     }
     public function rechercher($search_query)
     {
-        $req_search = "SELECT produit.*, categorie.nomCategorie AS nom_cat, marque.nomMarque AS nom_mar, sous_categorie.nom_sous_cat AS nom_sous_cat
-        FROM produit
-        JOIN categorie ON produit.code_categorie = categorie.code
-        JOIN sous_categorie ON produit.code_sous_cat = sous_categorie.code
-        JOIN marque ON produit.code_marque = marque.code WHERE nomProduit LIKE :search_query OR description LIKE :search_query OR categorie.nomCategorie LIKE :search_query OR marque.nomMarque LIKE :search_query OR sous_categorie.nom_sous_cat LIKE :search_query";
+        $req_search = "
+            SELECT produit.*, 
+                   categorie.nomCategorie AS nom_cat, 
+                   marque.nomMarque AS nom_mar, 
+                   sous_categorie.nom_sous_cat AS nom_sous_cat
+            FROM produit
+            JOIN categorie ON produit.code_categorie = categorie.code
+            JOIN sous_categorie ON produit.code_sous_cat = sous_categorie.code
+            JOIN marque ON produit.code_marque = marque.code
+            WHERE nomProduit LIKE :search_query 
+               OR description LIKE :search_query 
+               OR categorie.nomCategorie LIKE :search_query 
+               OR marque.nomMarque LIKE :search_query 
+               OR sous_categorie.nom_sous_cat LIKE :search_query
+        ";
+    
         $stmt_search = $this->db->prepare($req_search);
-        $stmt_search->execute(['search_query' => "%$search_query%"]);
+        $stmt_search->execute(['search_query' => $search_query . '%']);  // Le % permet de trouver tous les produits qui commencent par la lettre
         return $stmt_search->fetchAll(PDO::FETCH_OBJ);
     }
+    
     public function getCategoryProducts($category_id)
     {
         $req_categorie_product = "SELECT produit.*, categorie.nomCategorie AS categorie_nom 
@@ -105,6 +117,16 @@ class ModelProduit extends Model
 
         return $stmt_category->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getCategoryIdByName($name)
+{
+    // Exemple de requête SQL
+    $stmt = $this->db->prepare("SELECT code FROM categorie WHERE nomcategorie = :nom");
+    $stmt->bindParam(':nom', $name);
+    $stmt->execute();
+
+    return $stmt->fetchColumn(); // Retourne l'ID ou false
+}
 
     public function getFilteredProducts($category_id, $sous_categorie_id)
     {
