@@ -134,7 +134,7 @@
             <div class="image-holder">
                 <img src="../Arinas/assests/images/logo.jpg" alt="Image d'illustration">
             </div>
-            <form action="../PHP_Project/indexcreateuser.php" method="post">
+            <form action="../ARINAS/indexcreateuser.php" method="post">
                 <h3>Inscription</h3>
                 <div class="form-holder">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Nom complet" required>
