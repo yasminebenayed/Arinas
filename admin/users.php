@@ -1,4 +1,5 @@
 <?php
+include('header_actions.php');
 require_once("connexionDb.php");
 
 $req = "SELECT * FROM users";

@@ -1,4 +1,5 @@
 <?php
+include('header_actions.php');
 require_once("connexionDb.php");
 
 // Fetch all orders or orders for a specific user if `codeUser` is provided

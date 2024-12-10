@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <?php include"app/views/header.php" ?>
+  <?php include"../views/header.php" ?>
 
   <section id="new-products-section" class="bg-light py-5">
     <div class="container">
