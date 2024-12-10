@@ -66,6 +66,8 @@ $sous_cat = $results3->fetchAll(PDO::FETCH_OBJ);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../assests/images/logo.jpg">
+
     <title>Add Product</title>
     <style>
         body {

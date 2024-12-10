@@ -40,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assests/images/logo.jpg">
+
     <title>Arinas - Beauty & BodyCare</title>
     <link rel="stylesheet" type="text/css" href="../assests/css/bootstrap_prod.css" />
     <style>
