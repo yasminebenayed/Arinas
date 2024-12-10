@@ -58,23 +58,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert into database (example query)
-    $insertQuery = "INSERT INTO produit (nomProduit, description, designation, code_categorie, code_marque, code_sous_cat, prix, qte, img, promotion) 
-                    VALUES (:nom, :description, :designation, :categorie, :marque, :sous_categorie,:prix, :quantite, :image,  :promotion)";
-    $stmt = $pdo->prepare($insertQuery);
+   // Insert into database
+$insertQuery = "INSERT INTO produit (nomProduit, description, designation, code_categorie, code_sous_cat, code_marque, prix, qte, img, promotion) 
+VALUES (:nomProduit, :description, :designation, :code_categorie, :code_sous_cat, :code_marque, :prix, :qte, :img, :promotion)";
+
+$stmt = $pdo->prepare($insertQuery);
+
+try {
     $stmt->execute([
-        'nom' => $nomProduit,
+        'nomProduit' => $nomProduit,
         'description' => $description,
         'designation' => $designation,
-        'categorie' => $categorie,
-        'sous_categorie' => $sous_categorie,
-        'marque' => $marque,
-        'quantite' => $quantite,
+        'code_categorie' => $categorie,
+        'code_sous_cat' => $sous_categorie,
+        'code_marque' => $marque,
         'prix' => $prix,
-        'promotion' => $promotion,
-        'image' => $imagePath
+        'qte' => $quantite,
+        'img' => $imagePath,
+        'promotion' => $promotion
     ]);
-    
-   header('admin.php');
+
+    echo "<script>
+        alert('Product added successfully!');
+        setTimeout(function() {
+            window.location.href = 'admin.php';
+        }, 2000);
+    </script>";
+} catch (PDOException $e) {
+    error_log("Database Error: " . $e->getMessage()); // Log the exact error
+    echo "<script>
+        alert('Error adding product: Check logs for details.');
+        setTimeout(function() {
+            window.location.href = 'admin.php';
+        }, 2000);
+    </script>";
+}
 }
 
 // Fetch categories and brands
