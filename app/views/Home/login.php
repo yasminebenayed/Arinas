@@ -30,8 +30,13 @@ body {
     font-family: "Montserrat-Regular";
     margin: 0;
     padding: 0;
-    background-color: #F0F0F2;
+    background-color: #F0F0F2; /* Couleur de fond par défaut */
+    background-image: url('../../../assests/images/base.jpg'); /* Chemin relatif ou URL de l'image */
+    background-size: cover; /* Cette propriété permet à l'image de couvrir tout l'écran */
+    background-position: center center; /* Centrer l'image */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter */
 }
+
 
 .wrapper {
     min-height: 100vh;
@@ -46,7 +51,7 @@ body {
     display: flex;
     background-color: #fff;
     max-width: 1100px;
-    width: 100%;
+    width: 60%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 }
@@ -104,7 +109,7 @@ h3 {
 
 button {
     padding: 14px 20px;
-    background-color: #6b1817;
+    background-color: #ecc440;
     color: white;
     border: none;
     border-radius: 25px;
@@ -115,27 +120,69 @@ button {
 }
 
 button:hover {
-    background-color: #d7b3ae;
+    background-color:#000 ;
+}
+.a {
+    margin-left: 60px;
+    margin-top: 0px;
+
+}
+.b {
+    margin-left: 40px;
 }
 
-.error-message {
-    color: red;
-    text-align: center;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-.register-link {
-    color: #6b1817;
-    text-align: center;
-    font-size: 16px;
+.register-link{
+    color: #ffffff;
     text-decoration: none;
-    margin-top: 20px;
+}
+/* Style the title */
+h1.section-title {
+    font-family: 'Montserrat-SemiBold'; /* Use the semi-bold font */
+    color: #511d19; /* Dark brown color */
+    font-size: 36px; /* Adjust the font size */
+    text-align: center;
+    margin-top: 20px; /* Add some margin at the top */
+    margin-bottom: 30px; /* Add some margin at the bottom */
+    text-transform: uppercase; /* Uppercase letters */
 }
 
-.register-link:hover {
-    text-decoration: underline;
+/* Adjust form-holder for a better visual */
+.form-holder {
+    margin-bottom: 20px;
+    position: relative;
 }
+
+/* Add some additional custom styling for the form */
+.form-control {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* Adjusting the checkbox styles */
+.checkbox label {
+    font-size: 14px;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Styling for the "Se souvenir de moi" checkbox */
+.checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
 
 @media (max-width: 767px) {
     .inner {
@@ -152,7 +199,23 @@ button:hover {
         width: 100%;
         padding: 30px;
     }
+
 }
+.flash-message {
+    color: red;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    text-align: center; /* Centrer le texte horizontalement */
+    position: fixed; /* Fixer le message à un endroit de l'écran */
+    left: 50%; /* Placer l'élément à 50% de la largeur de l'écran */
+    transform: translateX(-50%); /* Centrer exactement en utilisant la moitié de la largeur de l'élément */
+    top: 20px; /* Placer le message à 20px du bas de l'écran */
+    width: auto; /* Laisser la largeur ajustée au contenu */
+    max-width: 100%; /* S'assurer que le message ne dépasse pas la largeur de l'écran */
+    z-index: 9999; /* Assurez-vous que le message est au-dessus des autres éléments */
+}
+
 </style>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -181,7 +244,6 @@ button:hover {
                 <img src="../../../../ARINAS/assests/images/logo.jpg" alt="Image d'illustration">
             </div>
             <form action="../../../../ARINAS/indexlogin.php" method="post">
-
                 <!-- Affichage du message flash -->
                 <?php if (isset($_SESSION['flash']['danger'])): ?>
                     <div class="flash-message">
@@ -191,8 +253,9 @@ button:hover {
                         ?>
                     </div>
                 <?php endif; ?>
+                
 
-            <h1 class="section-title text-center mt-4" data-aos="fade-up">Découvrez Nos Produits</h1>
+            <h1 class="section-title text-center mt-4" data-aos="fade-up">BIENVENU CHEZ PARAPHARMACIE <strong> ARINAS</strong></h1>
 
                 <div class="form-holder">
                     <input type="text" placeholder="E-mail" name="username" class="form-control"
@@ -213,8 +276,8 @@ button:hover {
                 </div>
 
                 <div class="form-login">
-                    <button name="login">Se connecter</button>
-                    <a href="../../../../ARINAS/indexcreateuser.php" class="register-link">S'inscrire</a>
+                    <button name="login" class="a">Se connecter</button>
+                    <button  class="b"><a href="../../../../ARINAS/indexcreateuser.php" class="register-link">S'inscrire</a></button>
                 </div>
             </form>
         </div>

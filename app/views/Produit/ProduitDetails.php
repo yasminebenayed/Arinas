@@ -27,7 +27,7 @@
 <body>
 <?php include"app/views/header.php" ?>
 
-    <section class="product-details py-5">
+    <section id="new-products-section"class="bg-light py-5 py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -50,12 +50,11 @@
 
     <?php include"app/views/footer.php"; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../../ARINAS/assests/js/jquery.min.js"></script>
-  <script src="../../../../ARINAS/assests/js/plugins.js"></script>
-  <script src="../../../../ARINAS/assests/js/SmoothScroll.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script src="assests/js/script.min.js"></script>
+<script src="../../../../ARINAS/assests/js/jquery.min.js"></script>
+<script src="../../../../ARINAS/assests/js/plugins.js"></script>
+<script src="../../../../ARINAS/assests/js/SmoothScroll.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="assests/js/script.min.js"></script>
 </body>
 </html>
