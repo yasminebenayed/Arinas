@@ -100,7 +100,7 @@ class ControllerPanier
     {
         $userCode = $_SESSION["user_id"];
         $produits = $this->model->getCartProducts($userCode);
-        header(Location:"app/views/Panier/panier.php");
+        include("app/views/Panier/panier.php");
         return $produits;
     }
     public function getMontantTotal()
