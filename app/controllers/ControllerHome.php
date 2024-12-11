@@ -43,7 +43,7 @@ class ControllerHome
                     setcookie("password", "", time() - 3600, "/");
                 }
 
-                header("Location: indexproduit.php");
+                header("Location: index.php?action=produit");
                 exit();
             } else {
                 $_SESSION['flash']['danger'] = "Identifiant ou mot de passe incorrecte";
@@ -54,7 +54,7 @@ class ControllerHome
     }
     public static function login()
     {
-        include("../../../ARINAS/indexlogin.php");
+        include("../../../ARINAS/index.php");
     }
 
     public function createProcess()
@@ -83,7 +83,7 @@ class ControllerHome
                 
                 $userCreated = $modelUser->create($data);
               
-                header("Location: indexproduit.php");
+                header("Location: index.php?action=produit");
 
                 
                     // Récupérez les informations complètes de l'utilisateur nouvellement créé.
@@ -96,13 +96,22 @@ class ControllerHome
                     $_SESSION['flash']['success'] = "Vous êtes maintenant connecté";
                 
                     // Redirigez vers une autre page.
-                    header("Location: indexproduit.php");
+                    header("Location: index.php?action=produit");
                     exit();
                 
             }
         }
 
         require('app/views/Home/signup.php');
+    }
+    public function logout(){
+        if (isset($_SESSION['user_id'])) {
+            session_unset();  // Supprime toutes les variables de session
+            session_destroy(); // Détruit la session
+        }
+        
+        header('Location: app/views/Home/login.php');
+        exit; 
     }
     
     

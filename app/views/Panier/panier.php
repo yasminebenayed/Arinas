@@ -197,8 +197,8 @@ h1 {
                             <td><?= number_format($produit->prix * $produit->qte, 2) ?> €</td>
                             <td>
   <div class="button-container">
-    <a href="indexdeletepanier.php?deletecart=<?= urlencode($produit->code); ?>" class="btns btns-carts">-</a>
-    <a href="indexajoutpanier.php?addToCart=<?= urlencode($produit->code); ?>&qte=1" class="btns btns-carts1">+</a>
+    <a href="index.php?action=deletepanier&deletecart=<?= urlencode($produit->code); ?>" class="btns btns-carts">-</a>
+    <a href="index.php?action=ajoutpanier&addToCart=<?= urlencode($produit->code); ?>&qte=1" class="btns btns-carts1">+</a>
   </div>
 </td>
 
@@ -208,7 +208,7 @@ h1 {
             </table>
             <div class="panier-total">
                 <h3>Montant Total : <?= number_format($this->model->getMontantTotal($_SESSION["user_id"]), 2) ?> €</h3>
-                <a class="btn" href="indexcreatecommande.php">Confirmez votre Commande</a>
+                <a class="btn" href="index.php?action=voirmoncommande">Confirmez votre Commande</a>
             </div>
         <?php else: ?>
             <p>Votre panier est vide.</p>

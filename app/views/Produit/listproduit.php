@@ -42,7 +42,7 @@
                             </a>
                             <div class="hover-buttonss">
                               <div  >
-                              <a href="indexajoutpanier.php?addToCart=<?= urlencode($p->code); ?>&qte=1" class="btns btns-carts">Ajouter au panier</a>
+                              <a href="index.php?action=ajoutpanier&addToCart=<?= urlencode($p->code); ?>&qte=1" class="btns btns-carts">Ajouter au panier</a>
 
                               </div>
                               <div>
@@ -63,7 +63,7 @@
                             </div>
                             
                             <div class="btn-left">
-                                <a href="indexdetailproduit.php?produit=<?= urlencode($p->code); ?>" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">
+                                <a href="index.php?action=detailproduit&produit=<?= urlencode($p->code); ?>" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">
                                     Découvrir Maintenant
                                 </a>
 

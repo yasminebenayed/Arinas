@@ -11,6 +11,45 @@ $user_inf = $stmt1->fetch(PDO::FETCH_ASSOC);
 
 
 <style>
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup-content button {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #confirmButton {
+        background-color: green;
+        color: white;
+    }
+
+    #cancelButton {
+        background-color: red;
+        color: white;
+    }
+
+
     .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -30,9 +69,7 @@ $user_inf = $stmt1->fetch(PDO::FETCH_ASSOC);
             font-size: 3.5rem;
         }
     }
-</style>
 
-<style>
     .cart-column-dark {
         background-color: #fff;
         color: #fff;
@@ -118,7 +155,7 @@ $user_inf = $stmt1->fetch(PDO::FETCH_ASSOC);
         </div>
         <div class="col-md-7 col-lg-7 ml-3">
             <h4 class="ml-3">Formulaire de commande</h4>
-            <form action="../../../../PHP_Project/indexcreatecommande.php" method="post" >
+            <form action="index.php?action=createcommande" method="post"  id="commandeForm">
                 <div class="row g-3">
                     <div class="col-md-6 mb-3">
                         <label for="firstName" class="form-label">Nom et prénom</label>
@@ -224,13 +261,14 @@ $user_inf = $stmt1->fetch(PDO::FETCH_ASSOC);
 
                 <hr class="my-4">
 
-                <button class="w-100 btn btn-primary btn-lg" type="submit" name="commander">Comfirmer le
+                <button class="w-100 btn btn-primary btn-lg" type="submit" name="commander"  onclick="confirmButton"id="commanderButton">Comfirmer le
                     paiement</button>
                 <br><br><br><br>
                
             </form>
         </div>
     </div>
+</div>
     </main>
     <script src="assests/js/bootstrap.bundle.min.js"></script>
 
@@ -257,6 +295,24 @@ $user_inf = $stmt1->fetch(PDO::FETCH_ASSOC);
             creditCardFields.style.display = 'none';
         }
     }
+</script><script>
+// Attacher un événement au bouton de confirmation
+const confirmButton = document.getElementById("commanderButton");
+const commandeForm = document.getElementById("commandeForm");
+
+confirmButton.addEventListener("click", function() {
+    // Afficher un popup de confirmation
+    const userConfirmed = confirm("Voulez-vous confirmer votre commande ?");
+    
+    if (userConfirmed) {
+        // Si l'utilisateur confirme, soumettre le formulaire
+        alert("Votre commande sera traitée dans 7 jours.");
+        commandeForm.submit(); // Soumettre le formulaire
+    } else {
+        // Si l'utilisateur annule, ne rien faire
+        alert("Commande annulée.");
+    }
+});
 </script>
 
 

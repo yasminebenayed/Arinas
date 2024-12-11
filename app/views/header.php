@@ -186,7 +186,14 @@
   <div class="search-popup">
     <div class="search-popup-container">
 
-    <form role="search" method="get" class="form-group" action="indexsearch.php">
+    <form role="search" method="get" class="form-group" action="../../../../ARINAS/index.php">
+  <!-- Champ caché pour transmettre l'action -->
+  <input 
+    type="hidden" 
+    name="action" 
+    value="search" 
+  />
+
   <input 
     type="search" 
     id="search-form" 
@@ -196,30 +203,36 @@
     value="<?php echo isset($_GET['nomProduit']) ? htmlspecialchars($_GET['nomProduit']) : ''; ?>" 
     required 
   />
+
   <button 
     type="submit" 
     class="search-submit border-0 position-absolute bg-white" 
-    style="top: 15px; right: 15px;">
-    <svg class="search" width="24" height="24">
+    style="top: 15px; right: 15px;"
+  >
+    <svg class="search" width="24" height="24" aria-hidden="true">
       <use xlink:href="#search"></use>
     </svg>
+    <span class="visually-hidden">Rechercher</span>
   </button>
 </form>
 
 
+
+
       <h5 class="cat-list-title">Choisissez Votre Catégorie</h5>
 
-<ul class="cat-list">
+      <ul class="cat-list">
     <li class="cat-list-item">
-        <a href="indexsearchcat.php?category=Corps">Corps</a>
+        <a href="index.php?action=searchcat&category=Corps">Corps</a>
     </li>
     <li class="cat-list-item">
-        <a href="indexsearchcat.php?category=Cheveux">Cheveux</a>
+        <a href="index.php?action=searchcat&category=Cheveux">Cheveux</a>
     </li>
     <li class="cat-list-item">
-        <a href="indexsearchcat.php?category=Visage">Visage</a>
+        <a href="index.php?action=searchcat&category=Visage">Visage</a>
     </li>
 </ul>
+
 
 
     </div>
@@ -257,16 +270,16 @@
                   <a class="nav-link dropdown-toggle active" href="#" id="dropdownHome" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
                     <li>
-                      <a href="indexproduit.php" class="dropdown-item item-anchor">Tout les Produits</a>
+                      <a href="index.php?action=produit" class="dropdown-item item-anchor">Tout les Produits</a>
                     </li>
                     <li class="cat-list-item">
-        <a href="indexsearchcat.php?category=Corps"  class="dropdown-item item-anchor">Corps</a>
+        <a href="index.php?action=searchcat&category=Corps"  class="dropdown-item item-anchor">Corps</a>
     </li>
     <li class="cat-list-item">
-        <a href="indexsearchcat.php?category=Cheveux"  class="dropdown-item item-anchor">Cheveux</a>
+        <a href="index.php?action=searchcat&category=Cheveux"  class="dropdown-item item-anchor">Cheveux</a>
     </li>
     <li class="cat-list-item">
-        <a href="indexsearchcat.php?category=Visage"  class="dropdown-item item-anchor">Visage</a>
+        <a href="index.php?action=searchcat&category=Visage"  class="dropdown-item item-anchor">Visage</a>
     </li>
                   </ul>
                 </li>
@@ -277,20 +290,20 @@
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
                   
                     <li>
-                      <a href="indexpanier.php" class="dropdown-item item-anchor">Cart </a>
+                      <a href="index.php?action=panier" class="dropdown-item item-anchor">Cart </a>
                     </li>
                    
                 
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Contact </a>
+                      <a href="" class="dropdown-item item-anchor">Contact </a>
                     </li>
                    
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">FAQs </a>
+                      <a href="" class="dropdown-item item-anchor">FAQs </a>
                     </li>
                     
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Wishlist </a>
+                      <a href="" class="dropdown-item item-anchor">Wishlist </a>
                     </li>
                   </ul>
                 </li>
@@ -299,7 +312,7 @@
                   <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-    <a href="indexlogout.php"class="nav-link" >Se déconnecter</a>
+    <a href="index.php?action=logout"class="nav-link" >Se déconnecter</a>
 </li>
 
               </ul>
@@ -314,7 +327,7 @@
               </a>
             </li>
             <li class="d-none d-lg-block">
-              <a href="indexpanier.php" class="text-uppercase mx-3">Cart 
+              <a href="index.php?action=panier" class="text-uppercase mx-3">Cart 
               </a>
             </li>
             <li class="d-lg-none">
@@ -325,7 +338,7 @@
               </a>
             </li>
             <li class="d-lg-none">
-              <a href="indexpanier.php" class="mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+              <a href="index.php?action=panier" class="mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                 <svg width="24" height="24" viewBox="0 0 24 24">
                   <use xlink:href="cart"></use>
                 </svg>

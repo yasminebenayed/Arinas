@@ -45,6 +45,25 @@ class ModelCommande extends Model
         $stmt4->execute(['user_id' => $userCode]);
         return $stmt4->fetchAll(PDO::FETCH_OBJ);
     }
+    public function updatecom($code, $data)
+    { //pour creeer UPDATE table_name SET name = :name, age = :age WHERE code = :code
+        try {
+            $data['code'] = $code;//recupere l'id 
+            $columns = array_keys($data); //recupere les keys de data
+            $sets = [];//bech y7ot fiha name = :name, age = :age
+            $i = 0;
+            foreach ($columns as $column) {
+                $sets[$i] = "$column = :$column";
+                $i++;
+            }
+            $setString = implode(', ', $sets);
+            $sql = "UPDATE $this->table SET $setString WHERE code = :code";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($data);
+        } catch (PDOException $e) {
+            die("Error updating data: " . $e->getMessage());
+        }
+    }
     
 
 }

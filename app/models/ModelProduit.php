@@ -61,6 +61,13 @@ class ModelProduit extends Model
             die("Error updating data: " . $e->getMessage());
         }
     }
+    public function getCurrentQuantity($productCode)
+{
+    $query = $this->db->prepare("SELECT qte FROM produit WHERE code = :code");
+    $query->execute(['code' => $productCode]);
+    return $query->fetchColumn();
+}
+
     public function findByDesignation($c)
     {
         $query = "SELECT produit.*, categorie.nom AS categorie_nom FROM produit
