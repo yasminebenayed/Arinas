@@ -21,11 +21,11 @@
 </head>
 
 <body>
-  <?php include"../views/header.php" ?>
+  <?php include"app/views/header.php" ?>
 
   <section id="new-products-section" class="bg-light py-5">
     <div class="container">
-        <h1 class="section-title text-center mt-4" data-aos="fade-up">Découvrez Nos Produits</h1>
+        <h1 class="section-title text-center mt-4" data-aos="fade-up" style="font-size: 40px;">Découvrez Nos Produits</h1>
         <div class="col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
             <br>
             <br>
@@ -38,7 +38,7 @@
                         <!-- Image du produit avec effet zoom -->
                         <div class="image-holder">
                             <a href="#">
-                                <img src="../../../PHP/PHP_Project/<?= htmlspecialchars($p->img); ?>" alt="<?= htmlspecialchars($p->nomProduit); ?>" class="img-fluid">
+                                <img src="<?= htmlspecialchars($p->img); ?>" alt="<?= htmlspecialchars($p->nomProduit); ?>" class="img-fluid">
                             </a>
                             <div class="hover-buttonss">
                               <div  >

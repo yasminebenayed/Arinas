@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,96 +25,130 @@
         }
 
         * {
-            box-sizing: border-box;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: "Montserrat-Regular";
-            margin: 0;
-            padding: 0;
-            background-color: #F0F0F2;
-        }
+body {
+    font-family: "Montserrat-Regular", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('assests/images/base.jpg'); /* Chemin relatif ou URL de l'image */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: url("../images/bg-login.jpg") no-repeat center center fixed;
-            background-size: cover;
-        }
+.wrapper {
+    width: 100%;
+    max-width: 800px; /* Largeur maximale du formulaire */
+    background-color: rgba(255, 255, 255, 0.85); /* Fond légèrement transparent */
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-        .inner {
-            display: flex;
-            background-color: #fff;
-            max-width: 1100px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-        }
+h3 {
+    font-family: 'Montserrat-SemiBold'; /* Use the semi-bold font */
+    color: #511d19; /* Dark brown color */
+    font-size: 36px; /* Adjust the font size */
+    text-align: center;
+    margin-top: 20px; /* Add some margin at the top */
+    margin-bottom: 30px; /* Add some margin at the bottom */
+    text-transform: uppercase; /* Uppercase letters */
+}
 
-        .image-holder {
-            width: 50%;
-            height: 100%;
-        }
+.form-holder {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
 
-        .image-holder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-        }
+.form-control {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
 
-        form {
-            width: 50%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.form-control:focus {
+    border-color: #6b1817;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(107, 24, 23, 0.5);
+    outline: none;
+}
 
-        h3 {
-            font-family: 'Dancing Script', cursive;
-            color: #511d19;
-            font-size: 40px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+button {
+    padding: 14px 20px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-left:40%;
+}
 
-        .form-holder {
-            margin-bottom: 10px;
-        }
+button:hover {
+    background-color:  #ecc440;
+}
 
-        .form-control {
-            width: 100%;
-			padding: 8px 15px; /* Réduit le rembourrage interne */
-            border-radius: 25px;
-            border: 1px solid #ddd;
-            background-color: #f7f7f7;
-            font-size: 14px;
-        }
+.checkbox {
+    margin-top: 10px;
+}
 
-        button {
-            padding: 14px 20px;
-            background-color: #6b1817;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.checkbox label {
+    font-size: 14px;
+}
 
-        button:hover {
-            background-color: #d7b3ae;
-        }
+.register-link {
+    color: #6b1817;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 20px;
+}
 
-        .register-link {
-            color: #6b1817;
-            text-align: center;
-            text-decoration: none;
-            margin-top: 20px;
-        }
+.register-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        padding: 20px;
+    }
+
+    h3 {
+        font-size: 30px;
+    }
+
+    .form-holder {
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
 
         @media (max-width: 767px) {
             .inner {
@@ -131,11 +166,11 @@
 <body>
     <div class="wrapper">
         <div class="inner">
-            <div class="image-holder">
+            <!-- <div class="image-holder">
                 <img src="../Arinas/assests/images/logo.jpg" alt="Image d'illustration">
-            </div>
+            </div> -->
             <form action="../ARINAS/indexcreateuser.php" method="post">
-                <h3>Inscription</h3>
+                <h3>Créer votre compte</h3>
                 <div class="form-holder">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Nom complet" required>
                 </div>
@@ -157,7 +192,7 @@
                     </label>
                 </div>
                 <div class="form-login">
-                    <button type="submit" name="ajout">S'inscrire</button>
+                    <button type="submit" name="ajout">Se connecter</button>
                     <p class="mt-3 text-center">Vous avez déjà un compte ? <a href="indexlogin.php" class="register-link">Se connecter</a></p>
                 </div>
             </form>

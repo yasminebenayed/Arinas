@@ -84,26 +84,21 @@ class ControllerHome
                 $userCreated = $modelUser->create($data);
               
                 header("Location: indexproduit.php");
-                exit();
 
-                if ($userCreated) {
+                
                     // Récupérez les informations complètes de l'utilisateur nouvellement créé.
                     $user = $modelUser->find($userCreated); // Implémentez cette méthode dans votre modèle.
-                    
+                    session_start();
                     // Stockez les données nécessaires dans la session.
                     $_SESSION['auth'] = $user;
-                    $_SESSION['user_id'] = $user['code']; // Ou ajustez selon le nom du champ (par ex. `code` si nécessaire).
+                    $_SESSION["user_id"] = $user['code']; // Ou ajustez selon le nom du champ (par ex. `code` si nécessaire).
                     $_SESSION['mail'] = $user['mail'];
                     $_SESSION['flash']['success'] = "Vous êtes maintenant connecté";
                 
                     // Redirigez vers une autre page.
                     header("Location: indexproduit.php");
                     exit();
-                } else {
-                    $_SESSION['flash']['danger'] = "Erreur lors de l'inscription";
-                    header("Location: signup.php");
-                    exit();
-                }
+                
             }
         }
 

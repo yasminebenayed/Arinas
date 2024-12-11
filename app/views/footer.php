@@ -31,107 +31,45 @@
           <div class="footer-menu footer-menu-001">
             <div class="footer-intro mb-4">
               <a href="index.html">
-                <img src="../../../assests/images//main-logo.png" alt="logo">
+                <img src="assests/images/logo.jpg" alt="Parapharmacie Arinas Logo" style="width:150px; height:auto;">
               </a>
             </div>
-            <p>Gravida massa volutpat aenean odio. Amet, turpis erat nullam fringilla elementum diam in. Nisi, purus
-              vitae, ultrices nunc. Sit ac sit suscipit hendrerit.</p>
             <div class="social-links">
               <ul class="list-unstyled d-flex flex-wrap gap-3">
-                <li>
-                  <a href="#" class="text-secondary">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                      <use xlink:href="#facebook"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="text-secondary">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                      <use xlink:href="#twitter"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="text-secondary">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                      <use xlink:href="#youtube"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="text-secondary">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                      <use xlink:href="#pinterest"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="text-secondary">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                      <use xlink:href="#instagram"></use>
-                    </svg>
-                  </a>
-                </li>
+                <li><a href="#" class="text-secondary"><i class="bi bi-facebook"></i></a></li>
+                <li><a href="#" class="text-secondary"><i class="bi bi-twitter"></i></a></li>
+                <li><a href="#" class="text-secondary"><i class="bi bi-instagram"></i></a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="footer-menu footer-menu-002">
-            <h5 class="widget-title text-uppercase mb-4">Quick Links</h5>
+            <h5 class="widget-title text-uppercase mb-4">Liens Rapides</h5>
             <ul class="menu-list list-unstyled text-uppercase border-animation-left fs-6">
-              <li class="menu-item">
-                <a href="index.html" class="item-anchor">Home</a>
-              </li>
-              <li class="menu-item">
-                <a href="index.html" class="item-anchor">About</a>
-              </li>
-              <li class="menu-item">
-                <a href="blog.html" class="item-anchor">Services</a>
-              </li>
-              <li class="menu-item">
-                <a href="styles.html" class="item-anchor">Single item</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="item-anchor">Contact</a>
-              </li>
+              <li><a href="index.html" class="item-anchor">Accueil</a></li>
+              <li><a href="about.html" class="item-anchor">A Propos</a></li>
+              <li><a href="services.html" class="item-anchor">Services</a></li>
+              <li><a href="contact.html" class="item-anchor">Contact</a></li>
             </ul>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="footer-menu footer-menu-003">
-            <h5 class="widget-title text-uppercase mb-4">Help & Info</h5>
-            <ul class="menu-list list-unstyled text-uppercase border-animation-left fs-6">
-              <li class="menu-item">
-                <a href="#" class="item-anchor">Track Your Order</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="item-anchor">Returns + Exchanges</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="item-anchor">Shipping + Delivery</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="item-anchor">Contact Us</a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="item-anchor">Find us easy</a>
-              </li>
-              <li class="menu-item">
-                <a href="index.html" class="item-anchor">Faqs</a>
-              </li>
+            <h5 class="widget-title text-uppercase mb-4">Heures d'Ouverture</h5>
+            <ul class="list-unstyled text-uppercase">
+              <li>Lundi - Vendredi: 8h30 - 18h00</li>
+              <li>Samedi: 9h00 - 14h00</li>
+              <li>Dimanche: Fermé</li>
             </ul>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
-          <div class="footer-menu footer-menu-004 border-animation-left">
-            <h5 class="widget-title text-uppercase mb-4">Contact Us</h5>
-            <p>Do you have any questions or suggestions? <a href="mailto:contact@yourcompany.com"
-                class="item-anchor">contact@yourcompany.com</a></p>
-            <p>Do you need support? Give us a call. <a href="tel:+43 720 11 52 78" class="item-anchor">+43 720 11 52
-                78</a>
-            </p>
+          <div class="footer-menu footer-menu-004">
+            <h5 class="widget-title text-uppercase mb-4">Nous Contacter</h5>
+            <p>Adresse: Route Maahdia KM 5</p>
+            <p>Email: <a href="mailto:contact@arinas.com" class="item-anchor">contact@arinas.com</a></p>
+            <p>Téléphone: <a href="tel:+21612345678" class="item-anchor">+216 12 345 678</a></p>
           </div>
         </div>
       </div>
@@ -139,28 +77,17 @@
     <div class="border-top py-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 d-flex flex-wrap">
-            <div class="shipping">
-              <span>We ship with:</span>
-              <img src="../../../assests/images//arct-icon.png" alt="icon">
-              <img src="../../../assests/images//dhl-logo.png" alt="icon">
-            </div>
-            <div class="payment-option">
-              <span>Payment Option:</span>
-              <img src="../../../assests/images//visa-card.png" alt="card">
-              <img src="../../../assests/images//paypal-card.png" alt="card">
-              <img src="../../../assests/images//master-card.png" alt="card">
-            </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p>&copy; 2024 Parapharmacie Arinas. Tous droits réservés.</p>
           </div>
           <div class="col-md-6 text-end">
-            <p>© Copyright 2022 Kaira. All rights reserved. Design by <a href="https://templatesjungle.com"
-                target="_blank">TemplatesJungle</a> Distribution By <a href="https://themewagon.com"
-              target="blank">ThemeWagon</a></p>
+            <p>Design par <a href="https://arinas.com" target="_blank">Arinas Team</a>.</p>
           </div>
         </div>
       </div>
     </div>
   </footer>
+
   <script src="../../../assests/js/jquery.min.js"></script>
   <script src="../../../assests/js/plugins.js"></script>
   <script src="../../../assests/js/SmoothScroll.js"></script>
