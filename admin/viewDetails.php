@@ -177,8 +177,16 @@ $detailsCommande = $stmt->fetchAll(PDO::FETCH_OBJ);
             echo '<form method="POST" action="updateOrderStatus.php" style="display:inline;">';
             echo '<input type="hidden" name="orderId" value="' . $commande->code . '" />';
             echo '<input type="hidden" name="newStatus" value="Accepté" />';
-            echo '<button type="submit" class="btn btn-primary ml-10"onclick="location.href="commandes.php">Valider</button>';
-            
+          echo'  <button type="button" class="btn btn-primary ml-10" onclick="validateOrder()">Valider</button>'
+?>
+<script>
+function validateOrder() {
+    alert("Commande validée");
+    window.location.href = 'commandes.php';
+}
+</script>
+
+           <?php 
             echo '</form>';
         }
     }

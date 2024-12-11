@@ -1,28 +1,6 @@
 <?php
-include('header_actions.php');
-
 require_once("connexionDb.php");
-
-// Check if 'marque' is set and is not empty
-if (!empty($_POST['marque'])) {
-    $code_marque = $_POST['marque']; // Retrieve marque value
-
-    // Debugging
-    var_dump($code_marque);
-
-    // Verify the marque exists in the database
-    $req = "SELECT COUNT(*) FROM marque WHERE code = ?";
-    $stmt = $pdo->prepare($req);
-    $stmt->execute([$code_marque]);
-    $exists = $stmt->fetchColumn();
-
-    if ($exists == 0) {
-        die("Error: The selected brand (code_marque) does not exist in the database.");
-    }
-}
-
-// Proceed with your insert query after validating all foreign keys
-
+include('header_actions.php');
 
 $req = "SELECT * FROM categorie";
 $results = $pdo->query($req);
@@ -34,7 +12,7 @@ $code = isset($_POST["categorie"]) ? $_POST["categorie"] : null;
 $code_sous_cat = isset($_POST["sous_categorie"]) ? $_POST["sous_categorie"] : null;
 
 
-
+//!!!!!!!!!!!!!!!!!!!!!!!__________AJAXXX_____________!!!!!!!!!!!!!!!!!!!!//
 if (isset($_POST['code'])) {
     $selectedCode = $_POST['code'];
 
@@ -62,120 +40,275 @@ $req3 = "SELECT * FROM sous_categorie WHERE code_categorie = :code";
 $results3 = $pdo->prepare($req3);
 $results3->execute(['code' => $defaultSelectedCode]);
 $sous_cat = $results3->fetchAll(PDO::FETCH_OBJ);
+
+//**********************//
+ /*$req2 = "SELECT * FROM sous_categorie ";
+ $results2 = $pdo->query($req2);
+ $sous_cat = $results2->fetchAll(PDO::FETCH_OBJ);
+ var_dump($sous_cat);*/
+ 
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Add Product</title>
+    <meta charset="utf-8" />
+    
+    <link rel="icon" type="image/jpg" href="../assests/images/logo.jpg">
+   
     <style>
-        body {
+ body {
             background-image: url('../assests/images/photo kbira.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #fff;
         }
+
+        /* Container styling */
         .container {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
             padding: 30px;
             border-radius: 10px;
             margin-top: 50px;
-            max-width: 600px;
-            margin: auto;
+            display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Horizontally center the children */
+    justify-content: center; 
         }
+
+        /* Header Styling */
         h2 {
             text-align: center;
             font-size: 36px;
             font-weight: bold;
+            margin-bottom: 30px;
         }
-        input, select, textarea, button {
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; }
+        input, select, textarea {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px; 
+         
+
+        }
+        textarea { height: 150px; }
+        .error-message { color: red; display: none; }
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background: rgba(255, 255, 255, 0.8);
-        }
-        button[type="submit"] {
-            background-color: #4CAF50;
+            background-color: #f7f7f7;
             color: white;
-            cursor: pointer;
+            background: rgba(69, 160, 73, 0.5);
+            max-width: 600px;
+            position: center;
         }
-        button[type="submit"]:hover {
+
+        input[type="file"] {
+            padding: 5px;
+            background-color: #fff;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+            color:black;
+        }
+
+        /* Error Message Styling */
+        .error-message {
+            color: red;
+            display: none;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
             background-color: #45a049;
+            border-color: #45a049;
+        }
+
+        /* Image Styling */
+        .form-group img {
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 1200px) {
+            .box {
+                flex-basis: calc(33.3333% - 20px);
+                /* Adjust the width for medium screens */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .box {
+                flex-basis: calc(50% - 20px);
+                /* Adjust the width for small screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .box {
+                flex-basis: calc(100% - 20px);
+                /* Adjust the width for extra small screens */
+            }
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const categorySelect = document.getElementById('categorie');
-            const subCategorySelect = document.getElementById('sous_categorie');
-
-            categorySelect.addEventListener('change', function () {
-                const codeCategorie = this.value;
-                fetch('add.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'code=' + codeCategorie
-                })
-                .then(response => response.text())
-                .then(data => {
-                    subCategorySelect.innerHTML = data;
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        });
-    </script>
-</head>
-<body>
-<div class="container">
-    <h2>Add a New Product</h2>
+  <div class="container mt-4" style="width: 80%; margin: auto;">
+    <h2>Ajouter un Produit</h2>
     <form action="add.php" method="POST" enctype="multipart/form-data">
-        <label for="nomProduit">Product Name:</label>
-        <input type="text" id="nomProduit" name="nomProduit" required>
-
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-
-        <label for="designation">Designation:</label>
-        <textarea id="designation" name="designation" required></textarea>
-
-        <label for="categorie">Category:</label>
-        <select id="categorie" name="categorie" required>
-            <?php foreach ($categorie as $c): ?>
-                <option value="<?= $c->code ?>"><?= htmlspecialchars($c->nomCategorie, ENT_QUOTES, 'UTF-8') ?></option>
-            <?php endforeach; ?>
-        </select>
-
-        <label for="sous_categorie">Subcategory:</label>
-        <select id="sous_categorie" name="sous_categorie" required>
-            <?php foreach ($sous_cat as $sc): ?>
-                <option value="<?= $sc->code ?>"><?= htmlspecialchars($sc->nom_sous_cat, ENT_QUOTES, 'UTF-8') ?></option>
-            <?php endforeach; ?>
-        </select>
-
-        <label for="marque">Brand:</label>
-        <select id="marque" name="marque" required>
-            <?php foreach ($marque as $m): ?>
-                <option value="<?= $m->code ?>"><?= htmlspecialchars($m->nomMarque, ENT_QUOTES, 'UTF-8') ?></option>
-            <?php endforeach; ?>
-        </select>
-
-        <label for="quantite">Quantity:</label>
-        <input type="number" id="quantite" name="quantite" required>
-
-        <label for="prix">Price:</label>
-        <input type="number" id="prix" name="prix" step="0.01" required>
-
-        <label for="promotion">Promotion:</label>
-        <input type="number" id="promotion" name="promotion" step="0.01">
-
-        <label for="image">Image:</label>
-        <input type="file" id="image" name="image" accept="image/*">
-
-        <button type="submit">Add Product</button>
+        <div class="form-group">
+            <label for="produit">Produit:</label>
+            <input type="text" class="form-control" id="nomProduit" name="nomProduit" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="designation">Designation:</label>
+            <textarea class="form-control" id="designation" name="designation" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="categorie">Catégorie:</label>
+            <select class="form-control" id="categorie" name="categorie" required>
+                <?php
+                foreach ($categorie as $c) {
+                    $selected = ($c->code == $code) ? "selected" : "";
+                    echo "<option value='" . $c->code . "' $selected>" . $c->nomCategorie . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sous_categorie">Sous-Catégorie:</label>
+            <select class="form-control" id="sous_categorie" name="sous_categorie" required>
+                <?php
+                foreach ($sous_cat as $sc) {
+                    $selectedsouscat = ($sc->code == $code_sous_cat) ? "selected" : "";
+                    echo "<option value='" . $sc->code . "' $selectedsouscat>" . $sc->nom_sous_cat . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="marque">Marque:</label>
+            <select class="form-control" id="marque" name="marque" required>
+                <?php
+                foreach ($marque as $m) {
+                    echo "<option value='1'>" . $m->nomMarque . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantite">Quantité en stock:</label>
+            <input type="number" class="form-control" id="quantite" name="quantite" required>
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix unitaire:</label>
+            <input type="number" class="form-control" id="prix" name="prix" required>
+        </div>
+        <div class="form-group">
+            <label for="promo">Promotion:</label>
+            <input type="number" class="form-control" id="promo" name="promo" required min="0" max="100" oninput="validatePromo()">
+            <div id="promo-error" class="error-message">La promotion doit être entre 0% et 100%.</div>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#categorie').change(function () {
+            var selectedCode = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: window.location.href,
+                data: { code: selectedCode },
+                success: function (response) {
+                    $('#sous_categorie').html(response);
+                },
+                error: function () {
+                    console.log('Error loading sous-categories.');
+                }
+            });
+        });
+    });
+
+    function validatePromo() {
+        var promoInput = document.getElementById("promo");
+        var errorMessage = document.getElementById("promo-error");
+
+        if (promoInput.value < 0 || promoInput.value >= 100) {
+            promoInput.style.borderColor = "red";
+            errorMessage.style.display = "block";
+        } else {
+            promoInput.style.borderColor = "";
+            errorMessage.style.display = "none";
+        }
+    }
+</script>
+
+           
+   
+    <!--   Core JS Files   -->
+    <script src="../dashboard/assets/js/core/popper.min.js"></script>
+    <script src="../dashboard/assets/js/core/bootstrap.min.js"></script>
+    <script src="../dashboard/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../dashboard/assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../dashboard/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
 </body>
+
 </html>

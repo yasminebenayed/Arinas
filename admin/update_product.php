@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $codeProduit) {
     ];
 
     if ($_FILES['image']['error'] === 0) {
-        $imagePath = "assets/images/" . $_FILES['image']['name'];
+        $imagePath =$_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
         $formData['image'] = $imagePath;
     }
@@ -167,6 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $codeProduit) {
         textarea {
             height: 120px;
             resize: vertical;
+            color:black;
         }
 
         /* Error Message Styling */

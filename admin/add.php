@@ -1,111 +1,55 @@
 <?php
 require_once("connexionDb.php");
 
-// Validate 'marque'
-if (!empty($_POST['marque'])) {
-    $code_marque = $_POST['marque'];
-
-    $req = "SELECT COUNT(*) FROM marque WHERE code = ?";
-    $stmt = $pdo->prepare($req);
-    $stmt->execute([$code_marque]);
-    $exists = $stmt->fetchColumn();
-
-    if ($exists == 0) {
-        die("Error: The selected brand does not exist in the database.");
-    }
+$nomProduit = isset($_POST['nomProduit']) ? $_POST['nomProduit'] : '';
+$description = isset($_POST['description']) ? $_POST['description'] : '';
+$designation = isset($_POST['designation']) ? $_POST['designation'] : '';
+$code_categorie = isset($_POST['categorie']) ? $_POST['categorie'] : '';
+$code_marque = isset($_POST['marque']) ? $_POST['marque'] : '';
+$code_sous_cat = isset($_POST['sous_categorie']) ? $_POST['sous_categorie'] : '';
+$prix = isset($_POST['prix']) ? $_POST['prix'] : '';
+$promo = isset($_POST['promo']) ? $_POST['promo'] : '';
+$qte = isset($_POST['quantite']) ? $_POST['quantite'] : '';
+var_dump($code_sous_cat);
+var_dump($code_categorie);
+// Handle image upload
+$img = ''; // Set a default value
+if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+    $imgName = $_FILES['image']['name'];
+    $imgTmpName = $_FILES['image']['tmp_name'];
+    $img = "../assests/images/" . $imgName; // Change the path to the 'uploads' directory
+    $img1= "assests/images/" . $imgName;
+    // Move the uploaded file to the specified location
+    move_uploaded_file($imgTmpName, $img);
 }
 
-// Handle AJAX request for subcategory
-if (isset($_POST['code'])) {
-    $selectedCode = $_POST['code'];
+// Prepare and execute the SQL query to insert data into the database
+$sql = "INSERT INTO `produit` (`code`, `nomProduit`, `description`, `designation`, `code_categorie`, `code_marque`, `code_sous_cat`, `prix`, `qte`, `img`, `promotion`) 
+        VALUES (NULL, :nomProduit, :description, :designation, :code_categorie, :code_marque, :code_sous_cat, :prix, :qte, :img, :promo)";
 
-    $req2 = "SELECT * FROM sous_categorie WHERE code_categorie = :code";
-    $stmt = $pdo->prepare($req2);
-    $stmt->execute(['code' => $selectedCode]);
-    $sous_cat = $stmt->fetchAll(PDO::FETCH_OBJ);
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':nomProduit', $nomProduit);
+$stmt->bindParam(':description', $description);
+$stmt->bindParam(':designation', $designation);
+$stmt->bindParam(':code_categorie', $code_categorie);
+$stmt->bindParam(':code_marque', $code_marque);
+$stmt->bindParam(':code_sous_cat', $code_sous_cat); // Fix the placeholder name here
+$stmt->bindParam(':prix', $prix);
+$stmt->bindParam(':promo', $promo);
+$stmt->bindParam(':qte', $qte);
+$stmt->bindParam(':img', $img1);
 
-    foreach ($sous_cat as $sc) {
-        echo "<option value='" . $sc->code . "'>" . htmlspecialchars($sc->nom_sous_cat, ENT_QUOTES, 'UTF-8') . "</option>";
-    }
+
+// Execute the query
+$result = $stmt->execute();
+
+// Check for success
+if ($result) {
+    header("Location: admin.php");
     exit();
+} else {
+    echo "Error inserting data. Please try again.";
 }
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nomProduit = htmlspecialchars($_POST['nomProduit'], ENT_QUOTES, 'UTF-8');
-    $description = htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8');
-    $designation = htmlspecialchars($_POST['designation'], ENT_QUOTES, 'UTF-8');
-    $categorie = $_POST['categorie'];
-    $sous_categorie = $_POST['sous_categorie'];
-    $marque = $_POST['marque'];
-    $quantite = $_POST['quantite'];
-    $prix = $_POST['prix'];
-    $promotion = $_POST['promotion'];
 
-    // Handle file upload
-    $imagePath = null;
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $targetDir = "uploads/";
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0777, true); // Create directory if it doesn't exist
-        }
-        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            $imagePath = $targetFile;
-        } else {
-            die("Error uploading the image.");
-        }
-    }
-
-    // Insert into database (example query)
-   // Insert into database
-$insertQuery = "INSERT INTO produit (nomProduit, description, designation, code_categorie, code_sous_cat, code_marque, prix, qte, img, promotion) 
-VALUES (:nomProduit, :description, :designation, :code_categorie, :code_sous_cat, :code_marque, :prix, :qte, :img, :promotion)";
-
-$stmt = $pdo->prepare($insertQuery);
-
-try {
-    $stmt->execute([
-        'nomProduit' => $nomProduit,
-        'description' => $description,
-        'designation' => $designation,
-        'code_categorie' => $categorie,
-        'code_sous_cat' => $sous_categorie,
-        'code_marque' => $marque,
-        'prix' => $prix,
-        'qte' => $quantite,
-        'img' => $imagePath,
-        'promotion' => $promotion
-    ]);
-
-    echo "<script>
-        alert('Product added successfully!');
-        setTimeout(function() {
-            window.location.href = 'admin.php';
-        }, 2000);
-    </script>";
-} catch (PDOException $e) {
-    error_log("Database Error: " . $e->getMessage()); // Log the exact error
-    echo "<script>
-        alert('Error adding product: Check logs for details.');
-        setTimeout(function() {
-            window.location.href = 'admin.php';
-        }, 2000);
-    </script>";
-}
-}
-
-// Fetch categories and brands
-$req = "SELECT * FROM categorie";
-$categorie = $pdo->query($req)->fetchAll(PDO::FETCH_OBJ);
-
-$req1 = "SELECT * FROM marque";
-$marque = $pdo->query($req1)->fetchAll(PDO::FETCH_OBJ);
-
-// Default subcategory options
-$defaultSelectedCode = $categorie[0]->code ?? 1;
-$req3 = "SELECT * FROM sous_categorie WHERE code_categorie = :code";
-$stmt = $pdo->prepare($req3);
-$stmt->execute(['code' => $defaultSelectedCode]);
-$sous_cat = $stmt->fetchAll(PDO::FETCH_OBJ);
 ?>
