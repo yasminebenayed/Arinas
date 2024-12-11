@@ -37,7 +37,14 @@ class ControllerPanier
             }
 
             $response = ['success' => true, 'message' => 'Produit ajouté au panier avec succès.'];
-            echo json_encode($response);
+           // echo json_encode($response);
+           if ($_SERVER['REQUEST_URI'] == "/index.php?action=produit") {
+            header("Location: index.php?action=produit");
+        } else  {
+            header("Location: index.php?action=panier");
+        } // Terminer l'exécution du script après redirection
+        
+        
             exit();
         }
         
@@ -57,21 +64,25 @@ class ControllerPanier
                     // Si la quantité est plus grande que 1, on réduit la quantité
                     if ($product->qte > 1) {
                         $this->model->updateQuantitymoins($userCode, $productCode);
-                        echo "success: quantity decreased";
+                      //  echo "success: quantity decreased";
                     } else {
                         // Sinon, on supprime le produit du panier
                         $this->model->deleteProduct($userCode, $productCode);
-                        echo "success: product removed";
+                       // echo "success: product removed";
                     }
                 } else {
-                    echo "error: Product not found in cart";
+                    echo "<script>alert('produit en rupture de stock');</script>";                
+
                 }
+                header("Location: index.php?action=panier");
+
             } catch (PDOException $e) {
                 // Gestion des erreurs de base de données
-                echo "error: " . $e->getMessage();
+                //echo "error: " . $e->getMessage();
             }
         } else {
-            echo "error: No product ID provided";
+           
+           // echo "error: No product ID provided";
         }
 
 
@@ -89,7 +100,7 @@ class ControllerPanier
     {
         $userCode = $_SESSION["user_id"];
         $produits = $this->model->getCartProducts($userCode);
-        include("app/views/Panier/panier.php");
+        header(Location:"app/views/Panier/panier.php");
         return $produits;
     }
     public function getMontantTotal()
