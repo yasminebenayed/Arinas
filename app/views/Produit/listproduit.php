@@ -42,7 +42,7 @@
                             </a>
                             <div class="hover-buttonss">
                               <div  >
-                              <a href="index.php?action=ajoutpanier&addToCart=<?= urlencode($p->code); ?>&qte=1" class="btns btns-carts">Ajouter au panier</a>
+                              <a href="index.php?action=ajoutpanier1&addToCart=<?= urlencode($p->code); ?>&qte=1" class="btns btns-carts">Ajouter au panier</a>
 
                               </div>
                               <div>

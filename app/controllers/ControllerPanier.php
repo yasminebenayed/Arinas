@@ -20,6 +20,32 @@ class ControllerPanier
         include("app/views/panier.php");
     }
 
+    public function addToCart1()
+    {
+        if (isset($_GET["addToCart"])) {
+            
+            $userCode = $_SESSION["user_id"];
+            $productCode = $_GET["addToCart"];
+
+            $isProductInCart = $this->model->isProductInCart($userCode, $productCode);
+
+            if ($isProductInCart) {
+                $this->model->updateQuantity($userCode, $productCode);
+            } else {
+                $qte= isset($_GET["qte"])?$_GET["qte"]:1;
+                $this->model->addToCart($userCode, $productCode,$qte);
+            }
+
+            $response = ['success' => true, 'message' => 'Produit ajouté au panier avec succès.'];
+           // echo json_encode($response);
+         
+            header("Location: index.php?action=produit");
+       
+        
+            exit();
+        }
+        
+    }
     public function addToCart()
     {
         if (isset($_GET["addToCart"])) {
@@ -38,16 +64,12 @@ class ControllerPanier
 
             $response = ['success' => true, 'message' => 'Produit ajouté au panier avec succès.'];
            // echo json_encode($response);
-           if ($_SERVER['REQUEST_URI'] == "/index.php?action=produit") {
-            header("Location: index.php?action=produit");
-        } else  {
             header("Location: index.php?action=panier");
-        } // Terminer l'exécution du script après redirection
+        exit();
         
         
-            exit();
+        
         }
-        
     }
     public function deleteProducts()
     {

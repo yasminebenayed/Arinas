@@ -29,6 +29,9 @@ if (isset($_GET['action'])) {
         case 'ajoutpanier':
             $panierController-> addToCart();
             break;
+        case 'ajoutpanier1':
+            $panierController-> addToCart1();
+            break;    
         case 'deletepanier':
             $panierController-> deleteProducts();
             break;
