@@ -302,9 +302,7 @@
                       <a href="" class="dropdown-item item-anchor">FAQs </a>
                     </li>
                     
-                    <li>
-                      <a href="" class="dropdown-item item-anchor">Wishlist </a>
-                    </li>
+                   
                   </ul>
                 </li>
                
@@ -323,8 +321,7 @@
         <div class="col-3 col-lg-auto">
           <ul class="list-unstyled d-flex m-0">
             <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3">Favories 
-              </a>
+             
             </li>
             <li class="d-none d-lg-block">
               <a href="index.php?action=panier" class="text-uppercase mx-3">Cart 
