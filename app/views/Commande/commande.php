@@ -77,7 +77,8 @@ $user_inf = $stmt1->fetch(PDO::FETCH_ASSOC);
 </style>
 <script src="https://smtpjs.com/v3/smtp.js">
 </script>
-
+<title>Votre Commande</title>
+<link rel="shortcut icon" href="../../../../ARINAS/assests/images/logo.jpg" type="image/x-icon">
 <link href="assests/css/form-validation.css" rel="stylesheet">
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

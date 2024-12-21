@@ -16,6 +16,9 @@ if (isset($_GET['action'])) {
         case'logout':
             $HomeControler-> logout();
             break;
+        case'contact':
+            $HomeControler-> contact();
+            break;    
        
         }
 }

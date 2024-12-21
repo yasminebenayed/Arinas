@@ -33,6 +33,8 @@ class ControllerHome
                 $_SESSION['auth'] = $user;
                 $_SESSION['user_id'] = $user['code'];
                 $_SESSION['mail'] = $user['mail'];
+                $_SESSION['nom'] = $user['nom'];
+
                 $_SESSION['flash']['success'] = "Vous êtes maintenant connecté";
 
                 if (isset($_POST['remember'])) {
@@ -93,6 +95,8 @@ class ControllerHome
                     $_SESSION['auth'] = $user;
                     $_SESSION["user_id"] = $user['code']; // Ou ajustez selon le nom du champ (par ex. `code` si nécessaire).
                     $_SESSION['mail'] = $user['mail'];
+                    $_SESSION['nom'] = $user['nom'];
+
                     $_SESSION['flash']['success'] = "Vous êtes maintenant connecté";
                 
                     // Redirigez vers une autre page.
@@ -114,7 +118,10 @@ class ControllerHome
         exit; 
     }
     
-    
+    public function contact(){
+        require_once ('app/views/Home/contact.php');
+    }
 }
+
 
 ?>

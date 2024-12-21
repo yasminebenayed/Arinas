@@ -290,12 +290,12 @@
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
                   
                     <li>
-                      <a href="index.php?action=panier" class="dropdown-item item-anchor">Cart </a>
+                      <a href="index.php?action=panier" class="dropdown-item item-anchor">Panier </a>
                     </li>
                    
                 
                     <li>
-                      <a href="" class="dropdown-item item-anchor">Contact </a>
+                      <a href="index.php?action=contact" class="dropdown-item item-anchor">Contact </a>
                     </li>
                    
                     <li>
@@ -307,7 +307,7 @@
                 </li>
                
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Contact</a>
+                  <a class="nav-link" href="index.php?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
     <a href="index.php?action=logout"class="nav-link" >Se déconnecter</a>
@@ -324,7 +324,7 @@
              
             </li>
             <li class="d-none d-lg-block">
-              <a href="index.php?action=panier" class="text-uppercase mx-3">Cart 
+              <a href="index.php?action=panier" class="text-uppercase mx-3"> Panier
               </a>
             </li>
             <li class="d-lg-none">

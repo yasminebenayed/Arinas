@@ -5,6 +5,8 @@ session_start();
 <html lang="fr">
 
 <head>
+<title>Arinas</title>
+<link rel="shortcut icon" href="../../../../ARINAS/assests/images/logo.jpg" type="image/x-icon">
     <meta charset="utf-8">
     <title>Arinas - Connexion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
