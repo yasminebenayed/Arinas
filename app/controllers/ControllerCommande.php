@@ -87,15 +87,20 @@ class ControllerCommande
                 ];
                 $details = new ModelDetailCommande($db);
                 $details->create($detailsData);
-                $produit->update($p->code, ['qte' => $p->qte]);
-                $panier->deleteCart($userCode, $p->code);
+                $currentQuantity = $produit->getCurrentQuantity($p->code); // Récupère la quantité actuelle
+                $newQuantity = $currentQuantity - $p->qte; // Calcule la nouvelle quantité
+                if ($newQuantity < 0) {
+                    $newQuantity = 0; // Assure que la quantité ne devienne jamais négative
+                }
+                $produit->update($p->code, ['qte' => $newQuantity]); // Met à jour la nouvelle quantité
+                                $panier->deleteCart($userCode, $p->code);
             }
             
             $this->displayOrderConfirmationModal($produits,$nom,$status, $email, $adresse, $ville, $pays, $code_postal, $payment_method, $total_quantity, $total_amount,$montant_total);
-            //include("app/views/Commande/validation.php");
+            header("Location: index.php?action=produit");
             exit();
         }
-        header("Location: indexcreatecommande.php");
+        #header("Location: indexcreatecommande.php");
 
     }
 

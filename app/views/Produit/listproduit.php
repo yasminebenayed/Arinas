@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Kaira - Bootstrap 5 Fashion Store HTML CSS Template</title>
+
+<title>Nos Produits</title>
+<link rel="shortcut icon" href="../../../../ARINAS/assests/images/logo.jpg" type="image/x-icon">
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,11 +45,13 @@
                             </a>
                             <div class="hover-buttonss">
                               <div  >
-                              <a href="indexajoutpanier.php?addToCart=<?= urlencode($p->code); ?>&qte=1" class="btns btns-carts">Ajouter au panier</a>
+                              <a href="index.php?action=ajoutpanier1&addToCart=<?= urlencode($p->code); ?>&qte=1" class="btns btns-carts">Ajouter au panier</a>
 
                               </div>
                               <div>
-                              <a href="#" class="btns btns-favs">Ajouter aux favoris</a>
+                              <a  class="btns btns-favs" href="index.php?action=detailproduit&produit=<?= urlencode($p->code); ?>" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">
+                                    Détail produit
+                                </a>
 
                               </div>
                             </div>
@@ -63,7 +68,7 @@
                             </div>
                             
                             <div class="btn-left">
-                                <a href="indexdetailproduit.php?produit=<?= urlencode($p->code); ?>" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">
+                                <a href="index.php?action=detailproduit&produit=<?= urlencode($p->code); ?>" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">
                                     Découvrir Maintenant
                                 </a>
 
