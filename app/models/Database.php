@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../conf/App.php';
         private function __construct() {
             try {
                 // Tentative de connexion à la base de données
-                $this->pdo = new PDO("mysql:host=" . App::DB_HOST . "; dbname=" . App::DB_NAME, App::DB_USER, App::DB_PASS);
+                $this->pdo = new PDO("mysql:host=" . App::DB_HOST . ";dbname=" . App::DB_NAME . ";port=4307", App::DB_USER, App::DB_PASS);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 
