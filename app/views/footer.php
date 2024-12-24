@@ -67,9 +67,9 @@
         <div class="col-md-3 col-sm-6">
           <div class="footer-menu footer-menu-004">
             <h5 class="widget-title text-uppercase mb-4">Nous Contacter</h5>
-            <p>Adresse: Route Maahdia KM 5</p>
-            <p>Email: <a href="mailto:contact@arinas.com" class="item-anchor">contact@arinas.com</a></p>
-            <p>Téléphone: <a href="tel:+21612345678" class="item-anchor">+216 12 345 678</a></p>
+            <p>Adresse: Route Manzel Chaker KM3</p>
+            <p>Email: <a href="mailto:contact@arinas.com" class="item-anchor">arinas@gmail.com</a></p>
+            <p>Téléphone: <a href="tel:+21629422121" class="item-anchor">+216 29 422 121</a></p>
           </div>
         </div>
       </div>

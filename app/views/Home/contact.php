@@ -27,32 +27,21 @@
   <section class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <h2 class="mb-4">Contactez-nous</h2>
-        <form action="submit_contact.php" method="POST">
-          <div class="mb-3">
-            <label for="name" class="form-label">Nom</label>
-            <input type="text" class="form-control" name="nom" id="firstName" placeholder=""
-            value="<?= $_SESSION['nom'] ?>" required>          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" name="mail" id="firstName" placeholder=""
-            value="<?= $_SESSION['mail'] ?>" required>             </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Votre message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
+        <h2 class="mb-4">Nos coordonnées</h2>
+        <p><strong>Adresse:</strong> Route Manzel Chaker KM3 en fac du magasin général, Sfax, Tunisie</p>
+        <p><strong>Email:</strong> arians@gmail.tn</p>
+        <p><strong>Téléphone:</strong> +216 29 422 121</p>
+        <p><strong>Fondatrice:</strong>Mme Bahri Asma </p>
       </div>
       <div class="col-md-6">
-        <h2 class="mb-4">Nos coordonnées</h2>
-        <p><strong>Adresse:</strong> 123 Rue Exemple, Sfax, Tunisie</p>
-        <p><strong>Email:</strong> contact@arinas.tn</p>
-        <p><strong>Téléphone:</strong> +216 50 584 922</p>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12617.455204595183!2d10.165790032660845!3d36.806494731375295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34c7e1234f6b%3A0xb6d8e01234c56789!2sCentre%20Ville%2C%20Tunis!5e0!3m2!1sen!2stn!4v1687888354720!5m2!1sen!2stn"
-          width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+      <h2 class="mb-4">Rejoignez nous </h2>
+
+      <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1272.6721541716782!2d10.7427972!3d34.7382487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13002d413a21dd63%3A0x8f2bcd9ae1ac2ee7!2sParapharmacie%20Arinass!5e0!3m2!1sen!2stn!4v1687888354720!5m2!1sen!2stn"
+  width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+</div>
     </div>
   </section>
 
