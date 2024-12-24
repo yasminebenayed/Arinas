@@ -6,6 +6,7 @@
 	
     <meta charset="utf-8">
     <title>Inscription - Arinas</title>
+    <link rel="shortcut icon" href="../../../../ARINAS/assests/images/logo.jpg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -169,7 +170,7 @@ button:hover {
             <!-- <div class="image-holder">
                 <img src="../Arinas/assests/images/logo.jpg" alt="Image d'illustration">
             </div> -->
-            <form action="../ARINAS/indexcreateuser.php" method="post">
+            <form action="../ARINAS/index.php?action=createuser" method="post">
                 <h3>Créer votre compte</h3>
                 <div class="form-holder">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Nom complet" required>
@@ -193,7 +194,7 @@ button:hover {
                 </div>
                 <div class="form-login">
                     <button type="submit" name="ajout">Se connecter</button>
-                    <p class="mt-3 text-center">Vous avez déjà un compte ? <a href="indexlogin.php" class="register-link">Se connecter</a></p>
+                    <p class="mt-3 text-center">Vous avez déjà un compte ? <a href="index.php?action=login" class="register-link">Se connecter</a></p>
                 </div>
             </form>
         </div>

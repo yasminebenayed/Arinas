@@ -5,6 +5,8 @@ session_start();
 <html lang="fr">
 
 <head>
+<title>Arinas</title>
+<link rel="shortcut icon" href="../../../../ARINAS/assests/images/logo.jpg" type="image/x-icon">
     <meta charset="utf-8">
     <title>Arinas - Connexion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -243,7 +245,7 @@ h1.section-title {
             <div class="image-holder">
                 <img src="../../../../ARINAS/assests/images/logo.jpg" alt="Image d'illustration">
             </div>
-            <form action="../../../../ARINAS/indexlogin.php" method="post">
+            <form action="../../../../ARINAS/index?action=login" method="post">
                 <!-- Affichage du message flash -->
                 <?php if (isset($_SESSION['flash']['danger'])): ?>
                     <div class="flash-message">
@@ -277,7 +279,7 @@ h1.section-title {
 
                 <div class="form-login">
                     <button name="login" class="a">Se connecter</button>
-                    <button  class="b"><a href="../../../../ARINAS/indexcreateuser.php" class="register-link">S'inscrire</a></button>
+                    <button  class="b"><a href="../../../../ARINAS/index.php?action=createuser" class="register-link">S'inscrire</a></button>
                 </div>
             </form>
         </div>

@@ -20,6 +20,32 @@ class ControllerPanier
         include("app/views/panier.php");
     }
 
+    public function addToCart1()
+    {
+        if (isset($_GET["addToCart"])) {
+            
+            $userCode = $_SESSION["user_id"];
+            $productCode = $_GET["addToCart"];
+
+            $isProductInCart = $this->model->isProductInCart($userCode, $productCode);
+
+            if ($isProductInCart) {
+                $this->model->updateQuantity($userCode, $productCode);
+            } else {
+                $qte= isset($_GET["qte"])?$_GET["qte"]:1;
+                $this->model->addToCart($userCode, $productCode,$qte);
+            }
+
+            $response = ['success' => true, 'message' => 'Produit ajouté au panier avec succès.'];
+           // echo json_encode($response);
+         
+            header("Location: index.php?action=produit");
+       
+        
+            exit();
+        }
+        
+    }
     public function addToCart()
     {
         if (isset($_GET["addToCart"])) {
@@ -37,10 +63,13 @@ class ControllerPanier
             }
 
             $response = ['success' => true, 'message' => 'Produit ajouté au panier avec succès.'];
-            echo json_encode($response);
-            exit();
-        }
+           // echo json_encode($response);
+            header("Location: index.php?action=panier");
+        exit();
         
+        
+        
+        }
     }
     public function deleteProducts()
     {
@@ -57,21 +86,25 @@ class ControllerPanier
                     // Si la quantité est plus grande que 1, on réduit la quantité
                     if ($product->qte > 1) {
                         $this->model->updateQuantitymoins($userCode, $productCode);
-                        echo "success: quantity decreased";
+                      //  echo "success: quantity decreased";
                     } else {
                         // Sinon, on supprime le produit du panier
                         $this->model->deleteProduct($userCode, $productCode);
-                        echo "success: product removed";
+                       // echo "success: product removed";
                     }
                 } else {
-                    echo "error: Product not found in cart";
+                    echo "<script>alert('produit en rupture de stock');</script>";                
+
                 }
+                header("Location: index.php?action=panier");
+
             } catch (PDOException $e) {
                 // Gestion des erreurs de base de données
-                echo "error: " . $e->getMessage();
+                //echo "error: " . $e->getMessage();
             }
         } else {
-            echo "error: No product ID provided";
+           
+           // echo "error: No product ID provided";
         }
 
 
